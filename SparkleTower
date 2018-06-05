@@ -1,4 +1,6 @@
 
+const byte pot = A; //there's a 1k pot connected to A0 with the intention of using it to control the speed of the chase
+
 void setup(){
 
 const int firstBulb = 26;
@@ -16,12 +18,12 @@ void loop(){
  const byte firstBulb = 26;
  const byte secondToLastBulb = 45;
  const byte lastBulb = 46;
- 
- int delayTime = 100; //delay time in milliseconds for the light sequence.  bigger value = longer sequence
 
     for (byte i = firstBulb; i <= secondToLastBulb; i++) { //illuminate lights in order
-      digitalWrite (i, HIGH);
-      delay (delayTime);
+      int potSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
+      delayTime = map (potSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
+      digitalWrite (i, HIGH); //digital write the for loop variable HIGH
+      delay (delayTime); //set by the pot from 10mS to 1 second
       
     } //closes the for loop
     
@@ -29,8 +31,10 @@ void loop(){
     delay (delayTime);
     
     for (byte i = lastBulb; i >= firstBulb; i--) { //turn off lights in reverse order
-      digitalWrite (i, LOW);
-      delay (delayTime);
+      int potSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
+      delayTime = map (potSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
+      digitalWrite (i, LOW); //digital write the for loop variable LOW
+      delay (delayTime); //set by the pot from 10mS to 1 second
     } //closes the for loop
 
 } //closes the loop
