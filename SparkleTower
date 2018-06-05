@@ -37,7 +37,7 @@ bool v = 0;
     int whileDelayTime = map (whilePotSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
     digitalWrite (lastBulb, HIGH); //digital write the last bulb HIGH
     delay (whileDelayTime); //set by pot from 10mS to 1 second
-    var++;
+    v++;
     
   } //closes the while loop
 
