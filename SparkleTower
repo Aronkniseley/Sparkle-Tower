@@ -1,5 +1,3 @@
-
-
 //a sketch to chase the lights up and back down a "TEST YOUR STRENGTH" carnival game for COACH.  June 4th, 2018.
 
 const byte firstBulb = 26; //the first bulb is connected to  pin 26
@@ -15,10 +13,14 @@ void setup() {
   } //closes the for loop
 
   pinMode (A0, INPUT); //set A0 as an analog input
+  Serial.begin (9600);
 
 } //closes the setup
 
 void loop() {
+  int analogSpeed = analogRead (A0);
+  int analogSpeedSetting = map (analogSpeed, 0, 1023, 10, 1000);
+digitalWrite (lastBulb, LOW);
 
   for (byte i = firstBulb; i <= secondToLastBulb; i++) { //illuminate lights in order
     int forPotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
@@ -27,12 +29,16 @@ void loop() {
     delay (forDelayTime); //set by the pot from 10mS to 1 second
 
   } //closes the for loop
+  
+bool v = 0;
 
-  while (lastBulb == LOW) {
+  while (v == 0) {
     int whilePotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
     int whileDelayTime = map (whilePotSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
     digitalWrite (lastBulb, HIGH); //digital write the last bulb HIGH
     delay (whileDelayTime); //set by pot from 10mS to 1 second
+    var++;
+    
   } //closes the while loop
 
   for (byte i = lastBulb; i >= firstBulb; i--) { //turn off lights in reverse order
@@ -42,5 +48,5 @@ void loop() {
     delay (forDelayTime); //set by the pot from 10mS to 1 second
 
   } //closes the for loop
-
-} //closes the loop
+  
+ v = 0;
