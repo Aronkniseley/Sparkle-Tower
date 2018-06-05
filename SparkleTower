@@ -1,6 +1,9 @@
 //a sketch to chase the lights up and back down a "TEST YOUR STRENGTH" carnival game for COACH.  June 4th, 2018.
 
-const byte pot = A0; //there's a 1k pot connected to A0 with the intention of using it to control the speed of the chase. Use a linear potentiometer for best results
+  const byte firstBulb = 26; //the first bulb is connected to  pin 26
+  const byte secondToLastBulb = 45; //the second to last bulb is connected to pin 45
+  const byte lastBulb = 46; //the last bulb is connected to pin 46
+  const byte pot = A0; //there's a 1k pot connected to A0 with the intention of using it to control the speed of the chase. Use a linear potentiometer for best results
 
 void setup() {
 
@@ -17,12 +20,6 @@ void setup() {
 } //closes the setup
 
 void loop() {
-
-  const byte firstBulb = 26; //the first bulb is connected to  pin 26
-  const byte secondToLastBulb = 45; //the second to last bulb is connected to pin 45
-  const byte lastBulb = 46; //the last bulb is connected to pin 46
-  int potSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
-  int delayTime = map(potSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
 
   for (byte i = firstBulb; i <= secondToLastBulb; i++) { //illuminate lights in order
     int forPotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
