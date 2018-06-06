@@ -18,13 +18,12 @@ void setup() {
 } //closes the setup
 
 void loop() {
-  int analogSpeed = analogRead (A0);
-  int analogSpeedSetting = map (analogSpeed, 0, 1023, 10, 1000);
-digitalWrite (lastBulb, LOW);
+  int highSpeed = 10; //10 mS
+  int lowSpeed = 500; // 1/2 a second
 
   for (byte i = firstBulb; i <= secondToLastBulb; i++) { //illuminate lights in order
     int forPotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
-    int forDelayTime = map (forPotSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
+    int forDelayTime = map (forPotSetting, 0, 1023, highSpeed, lowSpeed); //map the value to 10mS up to 1 second
     digitalWrite (i, HIGH); //digital write the for loop variable HIGH
     delay (forDelayTime); //set by the pot from 10mS to 1 second
 
@@ -34,7 +33,7 @@ bool v = 0;
 
   while (v == 0) {
     int whilePotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
-    int whileDelayTime = map (whilePotSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
+    int whileDelayTime = map (whilePotSetting, 0, 1023, highSpeed, lowSpeed); //map the value to 10mS up to 1 second
     digitalWrite (lastBulb, HIGH); //digital write the last bulb HIGH
     delay (whileDelayTime); //set by pot from 10mS to 1 second
     v++;
@@ -43,10 +42,12 @@ bool v = 0;
 
   for (byte i = lastBulb; i >= firstBulb; i--) { //turn off lights in reverse order
     int forPotSetting = analogRead (pot); //create a variable that reads the analog voltage of the potentiometer
-    int forDelayTime = map (forPotSetting, 0, 1023, 10, 1000); //map the value to 10mS up to 1 second
+    int forDelayTime = map (forPotSetting, 0, 1023, highSpeed, lowSpeed); //map the value to 10mS up to 1 second
     digitalWrite (i, LOW); //digital write the for loop variable LOW
     delay (forDelayTime); //set by the pot from 10mS to 1 second
 
   } //closes the for loop
   
  v = 0;
+
+} //closes the loop
